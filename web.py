@@ -1,10 +1,17 @@
 
 
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template,send_from_directory
+from flask_swagger_ui import get_swaggerui_blueprint
+
 from repo import FoodRepository
 from db import save_email
 food_repo = FoodRepository()
 app = Flask(__name__)
+
+@app.route('/static/swagger.json')
+def serve_swagger_file():
+    return send_from_directory('.', 'swagger.json')
+
 
 @app.route('/', methods=['GET'])
 def index(api=False):
@@ -50,7 +57,19 @@ def notify(food_id):
     save_email(email)
     return detail(food_id, notify=True)
 
+SWAGGER_URL = '/api/docs'
+API_URL = '/static/swagger.json'
 
+# Update the swaggerui_blueprint configuration
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Food API"
+    }
+)
+
+app.register_blueprint(swaggerui_blueprint)
 
 
 if __name__ == '__main__':

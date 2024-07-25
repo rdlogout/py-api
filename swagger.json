@@ -1,0 +1,137 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Food API",
+		"description": "API for retrieving food information",
+		"version": "1.0.0"
+	},
+	"paths": {
+		"/api": {
+			"get": {
+				"summary": "Get all food items",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "page",
+						"schema": {
+							"type": "integer",
+							"default": 1
+						},
+						"description": "Page number"
+					},
+					{
+						"in": "query",
+						"name": "q",
+						"schema": {
+							"type": "string"
+						},
+						"description": "Search query"
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"schema": {
+							"type": "integer",
+							"default": 24
+						},
+						"description": "Number of items per page"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Food"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/{food_id}": {
+			"get": {
+				"summary": "Get food item by ID",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "food_id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"description": "Food ID"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Food"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Food not found"
+					}
+				}
+			}
+		},
+		"/notify/{food_id}": {
+			"post": {
+				"summary": "Notify about a food item",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "food_id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"description": "Food ID"
+					},
+					{
+						"in": "query",
+						"name": "email",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"description": "User's email address"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response"
+					},
+					"404": {
+						"description": "Food not found"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Food": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
