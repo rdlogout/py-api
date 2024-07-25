@@ -1,11 +1,13 @@
 import argparse
+from tabulate import tabulate
 import json
 from repo import FoodRepository
 food_repo = FoodRepository()
 
 def list_food(args):
-    items = food_repo.get_all_food(start=args.offset, limit=args.limit, q=args.query)
-    print(json.dumps(items, indent=2))
+    items = food_repo.get_all_food(start=args.offset, limit=args.limit, q=args.query, zipcode=args.zipcode, max_distance=args.max_distance)
+    print(tabulate(items, headers='keys', tablefmt='heavy_grid'))
+    # print(json.dumps(items, indent=2))
 
 def get_food(args):
     food = food_repo.get_food_by_id(args.food_id)
@@ -27,6 +29,8 @@ def main():
     list_parser.add_argument("--offset", type=int, default=0, help="Start offset")
     list_parser.add_argument("--limit", type=int, default=24, help="Number of items to retrieve")
     list_parser.add_argument("--query", "-q", type=str, default="", help="Search query")
+    list_parser.add_argument("--zipcode", "-z", type=str, default="", help="Zipcode")
+    list_parser.add_argument("--max_distance", "-d", type=int, default=40, help="Max distance in miles")
     list_parser.set_defaults(func=list_food)
 
     # Get food by ID command
