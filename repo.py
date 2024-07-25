@@ -28,8 +28,7 @@ class FoodRepository:
     def get_items_length(self):
         return len(self.data.data)
 
-
-    def get_all_food(self,start=0,limit=10,cli=False,q=''):
+    def get_all_food(self,start=0,limit=24,q=''):
         temp_data=self.data.data
 
         if q:

@@ -57,7 +57,6 @@ def notify(food_id):
     return detail(food_id, notify=True)
 
  
-
-
+ 
 if __name__ == '__main__':
     app.run(debug=True)
