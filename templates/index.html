@@ -1,0 +1,44 @@
+{% extends 'layout.html' %} {% block content %}
+<h1 class="text-3xl font-bold text-gray-800 mb-7">Food Items</h1>
+<form class="flex gap-5 items-center mb-5">
+	<input type="text" name="q"
+    value="{{ q }}"
+    placeholder="Search Food" class="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-600" />
+</form>
+
+	<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+		{% for food in items %}
+		<a href="/{{ food['cnn'] }}" class="bg-white shadow p-5">
+			<div class="flex gap-4 items-center">
+				<p class="text-sm text-gray-400 mb-1">{{ food['address'] }}</p>
+			</div>
+			<p class="text-xl font-bold text-gray-800 mb-2 truncate">{{ food['applicant'] }}</p>
+			<p class="text-gray-600 text-sm mb-2">{{ food['items'] }}</p>
+		</a>
+		{% endfor %}
+	</div>
+
+	<div class="flex justify-center my-10">
+		<ul class="pagination flex justify-center gap-5 p-5 bg-white shadow rounded-md divide-x divide-gray-200">
+			{% if page > 1 %}
+			<li class="page-item">
+				<a class="page-link" href="?page={{ page - 1 }}">Previous</a>
+			</li>
+			{% endif %} {% for i in range(1, pages + 1) %} {% if i == page %}
+			<li class="page-item active">
+				<a class="page-link" href="?page={{ i }}">{{ i }}</a>
+			</li>
+			{% else %}
+			<li class="page-item">
+				<a class="page-link" href="?page={{ i }}">{{ i }}</a>
+			</li>
+			{% endif %} {% endfor %} {% if page < pages %}
+			<li class="page-item">
+				<a class="page-link" href="?page={{ page + 1 }}">Next</a>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
+
+	{% endblock %}
+</div>

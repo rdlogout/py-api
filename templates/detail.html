@@ -1,0 +1,29 @@
+{% extends 'layout.html' %} {% block content %} {%if notify %}
+<div class="bg-green-500 text-white font-bold py-2 px-4 rounded w-full">We will notify you soon</div>
+{%endif%} {%if data %}
+<div class="grid grid-cols-3 gap-10">
+	<div class="col-span-2">
+		<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+			<p class="text-gray-600 text-sm mb-2"><span class="">Cnn :</span> {{ data['cnn'] }}</p>
+
+			<h1 class="text-5xl font-bold text-gray-800 mb-2">{{ data['applicant'] }}</h1>
+			<p class="text-gray-600 text-sm mb-2"><span class="">Items :</span> {{ data['items'] }}</p>
+			<p class="text-gray-600 text-sm mb-2"><span class="">Address :</span> {{ data['address'] }}</p>
+			<p class="text-gray-600 text-sm mb-5"></p>
+			<iframe style="height: 400px; width: 100%; border: 0" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q={{data['address']}}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+		</div>
+	</div>
+	<div class="col-span-1">
+		<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+			<h1 class="text-5xl font-bold text-gray-800 mb-2">Notify Me</h1>
+			<form action="/notify/{{ data['cnn'] }}" method="post">
+				<div class="flex gap-5 items-center mb-5">
+					<input hidden type="text" name="q" value="{{ data['cnn'] }}" />
+					<input type="email" name="email" value="{{ data['email'] }}" placeholder="Email" class="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-600" required />
+				</div>
+				<button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">Notify</button>
+			</form>
+		</div>
+		{%endif%} {% endblock %}
+	</div>
+</div>
