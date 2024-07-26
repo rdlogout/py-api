@@ -59,7 +59,7 @@ class FoodRepository:
         temp_data=[item for item in temp_data if item['address'].lower().find(location.lower())!=-1]
         return temp_data
 
-    def get_all_food(self,start=0,limit=24,q='',zipcode='', max_distance=40):
+    def get_all_food(self,start=0,limit=24,q='',zipcode='', max_distance=4):
         temp_data=self.data.data
 
         if zipcode:
@@ -68,7 +68,10 @@ class FoodRepository:
             if not lat or not lon:
                 temp_data=[]
             else:
-                temp_data=[item for item in temp_data if self.get_distance(lat,lon,float(item['lat']),float(item['lon']))<=max_distance]
+                temp_data = sorted(
+                        [item for item in temp_data if self.get_distance(lat, lon, float(item['lat']), float(item['lon'])) <= max_distance],
+                        key=lambda x: self.get_distance(lat, lon, float(x['lat']), float(x['lon']))
+                    )
 
         if q:
             temp_data=[item for item in temp_data if item['applicant'].lower().find(q.lower())!=-1]

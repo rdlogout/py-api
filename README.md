@@ -46,7 +46,7 @@ This project is a Flask-based web application and API that provides information 
 
 1. Clone the repository:
 
-2. Create a virtual environment: python -m venv venv source venv/bin/activate # On Windows use venv\Scripts\activate
+2. Create a virtual environment: python3 -m venv venv source venv/bin/activate # On Windows use venv\Scripts\activate
 
 3. Install the required packages: pip install -r requirements.txt
 
