@@ -1,4 +1,4 @@
-# 🍽️ Food Information CLI Tool
+# 🍽️ Food Information CLI Tool and API
 
 ## 📌 Table of Contents
 
@@ -9,14 +9,17 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-  - [Commands](#commands)
-  - [Examples](#examples)
+  - [CLI Commands](#cli-commands)
+  - [CLI Examples](#cli-examples)
+- [API Documentation](#api-documentation)
+  - [Endpoints](#endpoints)
+  - [API Examples](#api-examples)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## 🌟 Overview
 
-This project is a Command Line Interface (CLI) tool that provides information about various food items. It allows users to list, search, and retrieve details about different foods, as well as sign up for notifications about specific items.
+This project provides both a Command Line Interface (CLI) tool and a RESTful API that offer information about various food items. Users can list, search, and retrieve details about different foods, as well as sign up for notifications about specific items.
 
 ## 🚀 Features
 
@@ -25,11 +28,13 @@ This project is a Command Line Interface (CLI) tool that provides information ab
 - 📋 Detailed view of individual food items
 - 📨 Email notification sign-up for specific food items
 - 📍 Location-based search using zipcode and distance
+- 🔗 RESTful API for programmatic access to food data
 
 ## 💻 Technology Stack
 
 - **Language**: Python 3.x
-- **Libraries**: argparse, tabulate, json
+- **Web Framework**: Flask
+- **CLI Libraries**: argparse, tabulate, json
 - **Data Source**: Custom FoodRepository class
 
 ## 🏁 Getting Started
@@ -62,7 +67,7 @@ This project is a Command Line Interface (CLI) tool that provides information ab
 
 ## 🖥️ Usage
 
-### Commands
+### CLI Commands
 
 The CLI tool supports the following commands:
 
@@ -83,7 +88,7 @@ The CLI tool supports the following commands:
    python cli.py notify <food_id> <email>
    ```
 
-### Examples
+### CLI Examples
 
 1. List all food items:
 
@@ -112,6 +117,69 @@ The CLI tool supports the following commands:
 5. Search for food items near a specific location:
    ```
    python cli.py list --zipcode 90210 --max_distance 20
+   ```
+
+## 📘 API Documentation
+
+### Endpoints
+
+The API provides the following endpoints:
+
+1. **List Food Items**
+
+   - `GET /api`
+   - Query Parameters:
+     - `offset` (int): The offset for pagination (default: 0)
+     - `limit` (int): The number of items to retrieve (default: 24)
+     - `q` (string): Search query
+     - `zipcode` (string): Zipcode for location-based search
+     - `max_distance` (int): Maximum distance in miles (default: 40)
+
+2. **Get Food Item by ID**
+
+   - `GET /api/<food_id>`
+   - Path Parameters:
+     - `food_id` (string): The ID of the food item
+
+3. **Sign Up for Notifications**
+   - `POST /notify/<food_id>`
+   - Path Parameters:
+     - `food_id` (string): The ID of the food item
+   - Form Data:
+     - `email` (string): Email address for notification
+
+### API Examples
+
+1. List all food items:
+
+   ```
+   GET /api
+   ```
+
+2. Search for food items with a query:
+
+   ```
+   GET /api?q=apple&limit=10
+   ```
+
+3. Get details of a specific food item:
+
+   ```
+   GET /api/12345
+   ```
+
+4. Sign up for notifications:
+
+   ```
+   POST /notify/12345
+   Content-Type: application/x-www-form-urlencoded
+
+   email=user@example.com
+   ```
+
+5. Search for food items near a specific location:
+   ```
+   GET /api?zipcode=90210&max_distance=20
    ```
 
 ## 🤝 Contributing
