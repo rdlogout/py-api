@@ -1,4 +1,4 @@
-# 🍽️ Food Information API and Web Application
+# 🍽️ Food Information CLI Tool
 
 ## 📌 Table of Contents
 
@@ -9,73 +9,110 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-  - [Running the Application](#running-the-application)
-  - [API Endpoints](#api-endpoints)
-- [API Documentation](#api-documentation)
+  - [Commands](#commands)
+  - [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## 🌟 Overview
 
-This project is a Flask-based web application and API that provides information about various food items. It allows users to browse, search, and retrieve details about different foods, as well as sign up for notifications about specific items.
+This project is a Command Line Interface (CLI) tool that provides information about various food items. It allows users to list, search, and retrieve details about different foods, as well as sign up for notifications about specific items.
 
 ## 🚀 Features
 
-- 📊 Paginated list of food items
+- 📊 List food items with pagination
 - 🔍 Search functionality for food items
 - 📋 Detailed view of individual food items
 - 📨 Email notification sign-up for specific food items
-- 🔗 RESTful API for programmatic access to food data
-- 📚 Swagger UI for interactive API documentation
+- 📍 Location-based search using zipcode and distance
 
 ## 💻 Technology Stack
 
-- **Backend**: Python 3.x, Flask
-- **Database**: (Specify your database, e.g., SQLite, PostgreSQL) (Pass)
-- **API Documentation**: Swagger/OpenAPI 3.0
-- **Frontend**: HTML, CSS (and any JavaScript libraries if used)
+- **Language**: Python 3.x
+- **Libraries**: argparse, tabulate, json
+- **Data Source**: Custom FoodRepository class
 
 ## 🏁 Getting Started
 
 ### Prerequisites
 
 - Python 3.x
-- pip (Python package manager)
+- pip3 (Python package manager)
 
 ### Installation
 
 1. Clone the repository:
 
-2. Create a virtual environment: python3 -m venv venv source venv/bin/activate # On Windows use venv\Scripts\activate
+   ```
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
 
-3. Install the required packages: pip install -r requirements.txt
+2. Create a virtual environment:
+
+   ```
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+3. Install the required packages:
+   ```
+   pip3 install -r requirements.txt
+   ```
 
 ## 🖥️ Usage
 
-### Running the Application
+### Commands
 
-To start the Flask development server:
+The CLI tool supports the following commands:
 
-python web.py
+1. **List food items**:
 
-The application will be available at `http://localhost:5000`.
+   ```
+   python cli.py list [--offset OFFSET] [--limit LIMIT] [--query QUERY] [--zipcode ZIPCODE] [--max_distance MAX_DISTANCE]
+   ```
 
-### API Endpoints
+2. **Get food item by ID**:
 
-- `GET /api`: Retrieve a list of food items
-- `GET /api/<food_id>`: Get details of a specific food item
-- `POST /notify/<food_id>`: Sign up for notifications about a specific food item
+   ```
+   python cli.py get <food_id>
+   ```
 
-For detailed API usage, refer to the [API Documentation](#api-documentation) section.
+3. **Sign up for notifications**:
+   ```
+   python cli.py notify <food_id> <email>
+   ```
 
-## 📘 API Documentation
+### Examples
 
-Interactive API documentation is available through Swagger UI. To access it:
+1. List all food items:
 
-1. Start the Flask application
-2. Navigate to `http://localhost:5000/api/docs` in your web browser
+   ```
+   python cli.py list
+   ```
 
-Here you can explore and test all available API endpoints.
+2. Search for food items with a query:
+
+   ```
+   python cli.py list --query "apple" --limit 10
+   ```
+
+3. Get details of a specific food item:
+
+   ```
+   python cli.py get 12345
+   ```
+
+4. Sign up for notifications:
+
+   ```
+   python cli.py notify 12345 user@example.com
+   ```
+
+5. Search for food items near a specific location:
+   ```
+   python cli.py list --zipcode 90210 --max_distance 20
+   ```
 
 ## 🤝 Contributing
 
@@ -88,6 +125,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 5. Open a Pull Request
 
 ## 📄 License
+
+[Specify your license here]
 
 ---
 
