@@ -83,7 +83,7 @@ Users can list, search, and retrieve details about various food items, as well a
 To start the web application:
 
 ```
-python web.py
+python3 web.py
 ```
 
 The web interface will be available at `http://localhost:5000`.
@@ -95,18 +95,18 @@ The CLI tool supports the following commands:
 1. **List food items**:
 
    ```
-   python cli.py list [--offset OFFSET] [--limit LIMIT] [--query QUERY] [--zipcode ZIPCODE] [--max_distance MAX_DISTANCE]
+   python3 cli.py list [--offset OFFSET] [--limit LIMIT] [--query QUERY] [--zipcode ZIPCODE] [--max_distance MAX_DISTANCE]
    ```
 
 2. **Get food item by ID**:
 
    ```
-   python cli.py get <food_id>
+   python3 cli.py get <food_id>
    ```
 
 3. **Sign up for notifications**:
    ```
-   python cli.py notify <food_id> <email>
+   python3 cli.py notify <food_id> <email>
    ```
 
 ### API Endpoints
@@ -158,30 +158,30 @@ The CLI tool supports the following commands:
 1. List all food items:
 
    ```
-   python cli.py list
+   python3 cli.py list
    ```
 
 2. Search for food items with a query:
 
    ```
-   python cli.py list --query "apple" --limit 10
+   python3 cli.py list --query "apple" --limit 10
    ```
 
 3. Get details of a specific food item:
 
    ```
-   python cli.py get 12345
+   python3 cli.py get 12345
    ```
 
 4. Sign up for notifications:
 
    ```
-   python cli.py notify 12345 user@example.com
+   python3 cli.py notify 12345 user@example.com
    ```
 
 5. Search for food items near a specific location:
    ```
-   python cli.py list --zipcode 90210 --max_distance 20
+   python3 cli.py list --zipcode 90210 --max_distance 20
    ```
 
 ### API Examples
@@ -227,11 +227,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📄 License
-
-[Specify your license here]
-
----
-
-Developed with ❤️ by [Your Name/Organization]
